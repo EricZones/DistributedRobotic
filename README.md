@@ -1,6 +1,6 @@
 # DistributedRobotic
 
-DistributedRobotic is a simulated distributed system with controller and robots. It uses RPC for the communication with a controller and message oriented middleware between robots.
+DistributedRobotic is a simulated distributed system with controller and robots. It uses RPC for the communication with a controller and Message Oriented Middleware between robots.
 
 ## Features
 - **Controller:**
