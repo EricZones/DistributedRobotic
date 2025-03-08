@@ -1,0 +1,18 @@
+FROM python:3.13-slim
+
+WORKDIR /app
+
+COPY /tests/tests_http.py /app
+COPY /tests/tests_http_rtt.txt /app
+COPY /tests/tests_grpc.py /app
+COPY /tests/tests_grpc_rtt.txt /app
+COPY /src/proto /app/src/proto
+COPY /tests/tests_mqtt.py /app
+
+RUN pip install --upgrade pip
+RUN pip install grpcio==1.71.0rc2 grpcio-tools==1.71.0rc2
+RUN pip install paho-mqtt
+
+ENV PYTHONPATH=/app
+
+CMD python tests_http.py && python tests_grpc.py && python tests_mqtt.py

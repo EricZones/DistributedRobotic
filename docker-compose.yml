@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  controller:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.controller
+    ports:
+      - "8080:8080"  # HTTP-Server
+      - "50051:50051"  # gRPC-Server
+    container_name: distributed_robotic_controller
+
+  robot:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.robot
+    container_name: distributed_robotic_robot
+    stdin_open: true   # Open stdin for inputs
+    tty: true          # Simulates terminal for interactivity
+   
+  tests:
+    volumes:
+      - ./tests/tests_http_rtt.txt:/app/tests_http_rtt.txt
+      - ./tests/tests_grpc_rtt.txt:/app/tests_grpc_rtt.txt
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.tests
+    container_name: distributed_robotic_tests
+    
+  broker:
+    image: eclipse-mosquitto
+    container_name: distributed_robotic_broker
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./docker/mosquitto.conf:/mosquitto/config/mosquitto.conf
