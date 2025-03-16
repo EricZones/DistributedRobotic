@@ -82,9 +82,6 @@ This project includes both functional and non-functional tests:
   python ./tests/tests_mqtt.py
   ```
 
-## Contributors
-- **EricZones** - Developer
-
 ## Purpose
 The project simulates remote communication between services with RPC and Message Oriented Middleware.
 It was originally created for an evaluation at the university in 2025.
